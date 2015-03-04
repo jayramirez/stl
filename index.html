@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DEMO</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery1.11.2.js"></script>	
+	<script src="js/fastclick.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+
+
+<div class="wrapper">
+
+	<div class="code-holder">
+		<div class="section-header">Control Number:</div>
+		<div class="content">
+			<input type="text" value=""	 autocomplete="off" id="ctrlNumberValue"/>
+			<button type="button" class="btn" id="ctrlNumberConfirm">OK</button>
+			<div class="clearfix"></div>
+			<div id="error"></div>
+		</div>
+	</div>
+
+
+	<div class="canvas hide">
+		<div class="control-number">
+			<div class="digit-screen">
+				<span class="selected-combinations">  </span>
+				<span class="selected-amount"></span>
+			</div>
+			
+			<div class="keypads">
+				<div id="combinations">
+					<div class="section-header">Combinations</div>
+					<div class="combinations keys">
+						<button type="button" id="okCombinations">OK</button>
+					</div>
+				</div>
+
+				<div id="amount" class="hide">
+					<div class="section-header">
+						Bet
+						<button type="button" id= "cancelBet">&times;</button>
+					</div>
+					<div class="amount keys">
+						<button type="button" id= "okBet">Place Bet</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="lists">
+			<div class="content">
+				<div class="section-header">Ctrl No.: <span id="ctrlNumber"></span></div>
+				<ul>
+					<!-- js generated -->
+				</ul>
+				<div class="action">
+					<button class="btn" id="closeCurrent">Close</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<footer>
+		<small>Version 0.2 Beta</small>
+		<small>Powered by: Aptus Digital Solutions Inc. &copy; 2015</small>
+	</footer>
+</div>
+
+
+</body>
+</html>
