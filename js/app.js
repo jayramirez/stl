@@ -51,14 +51,10 @@ function SuperLucky(){
 		self.createAlphaNumericKeys();
 
 		$(self.el.ctrlNumberConfirm).click(function(){
-			//if(self.el.ctrlNumberValue.val()==''){
-		//		$('#error', self.el.codeHolder).html('<div>Please enter a control number.</div>');
-		//		$('#error div', self.el.codeHolder).fadeIn(0);
-		//	}else{
-				self.el.codeHolder.addClass('hide');
-				CONTOLNO = self.ctrlno.join('');
-				self.showCombinationKeys();
-		//	}
+			self.el.codeHolder.addClass('hide');
+			CONTOLNO = self.ctrlno.join('');
+			self.showCombinationKeys();
+		
 		})
 
 		$(self.el.ctrlNumberClear).click(function(){
@@ -83,7 +79,6 @@ function SuperLucky(){
 						}
 						
 						self.ctrlno.push(el.text());
-						console.log(self.ctrlno,'add');
 						updateViewCtrlNumber();
 				})
 
@@ -101,7 +96,6 @@ function SuperLucky(){
 						}
 						
 						self.ctrlno.push(el.text());
-						console.log(self.ctrlno,'add');
 						updateViewCtrlNumber();
 				})
 
@@ -143,27 +137,23 @@ function SuperLucky(){
 
 
 		for (var i = 38; i > 0; i--) {
-			var btn = $('<span class="btnkey"><input type="checkbox" value="'+i+'">'+i+'</span>');
+			var btn = $('<span class="btnkey">'+i+'</span>');
 			btn.prependTo(self.el.combKeyHolder);
 
 				btn.unbind('click').bind('click',function(){
 					var el = $(this);
-					var input = $('input',el);
 
-					if(!input.is(':checked')){
+					if(!el.hasClass('active')){
 
 						if(self.combinations.length>=5){
 							return false;
 						}
-						input.prop('checked',true);
 						el.addClass('active');
-						self.combinations.push(input.val());
-						console.log(self.combinations,'add')
+						self.combinations.push(el.text());
+
 					}else{	
-						input.prop('checked',false);
 						el.removeClass('active');
-						self.combinations.remove(input.val());
-						console.log(self.combinations,'pop')
+						self.combinations.remove(el.text());
 					}
 
 					updateViewCombinations();
@@ -231,22 +221,17 @@ function SuperLucky(){
 
 				btn.unbind('click').bind('click',function(){
 					var el = $(this);
-					var input = $('input',el);
 
-					if(!input.is(':checked')){
+					if(!el.hasClass('.active')){
 
 						if(self.bet.length>=max){
 							return false;
 						}
-						input.prop('checked',true);
 						el.addClass('active');
-						self.bet.push(input.val());
-						console.log(self.bet,'add')
+						self.bet.push(el.text());
 					}else{	
-						input.prop('checked',false);
 						el.removeClass('active');
-						self.bet.remove(input.val());
-						console.log(self.bet,'pop')
+						self.bet.remove(el.text());
 					}
 
 					updateViewBet();
@@ -291,8 +276,6 @@ function SuperLucky(){
 			amount : bet,
 			ctrlno : CONTOLNO
 
-		},function(result){
-			console.log(result)
 		})
 	}
 }
@@ -300,7 +283,9 @@ function SuperLucky(){
 
 var superLucky = new SuperLucky();
 
+
+
 $(function(){
-	superLucky.init();
 	FastClick.attach(document.body);
+	superLucky.init();
 })
