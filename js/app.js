@@ -23,6 +23,7 @@ function SuperLucky(){
 	self.init = function(){
 		self.el = {
 			ctrlNumberConfirm : $('#ctrlNumberConfirm'),
+			ctrlNumberClear : $('#ctrlNumberClear'),
 			ctrlNumberValue : $('#ctrlNumberValue'),
 			codeHolder : $('.code-holder'),
 			combKeypad : $('#combinations'),
@@ -58,6 +59,13 @@ function SuperLucky(){
 				CONTOLNO = self.ctrlno.join('');
 				self.showCombinationKeys();
 		//	}
+		})
+
+		$(self.el.ctrlNumberClear).click(function(){
+				self.el.viewCtrlno.html('');
+				self.el.ctrlNumberConfirm.hide();
+				self.ctrlno = [];
+				CONTOLNO = '';
 		})
 	}
 
@@ -100,7 +108,7 @@ function SuperLucky(){
 		};
 
 		function updateViewCtrlNumber(){
-			if(self.ctrlno.length==10){
+			if(self.ctrlno.length==9){
 				self.el.ctrlNumberConfirm.show();
 			}
 
@@ -134,7 +142,7 @@ function SuperLucky(){
 		self.el.okBet.hide();	
 
 
-		for (var i = 30; i > 0; i--) {
+		for (var i = 38; i > 0; i--) {
 			var btn = $('<span class="btnkey"><input type="checkbox" value="'+i+'">'+i+'</span>');
 			btn.prependTo(self.el.combKeyHolder);
 
@@ -278,11 +286,13 @@ function SuperLucky(){
 		self.el.viewComb.html('');
 
 
-		$.post('192.168.1.100/superlucky/api.php',{
-			combinations : self.combinations,
-			amount : self.bet,
-			ctrlno : CONTOLNO,
-			token: 'SK817DS34253DS8DDASSDJHDSS970'
+		$.post('http://192.168.1.100/superlucky/api.php',{
+			combinations : combinations,
+			amount : bet,
+			ctrlno : CONTOLNO
+
+		},function(result){
+			console.log(result)
 		})
 	}
 }

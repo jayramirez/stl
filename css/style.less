@@ -66,7 +66,7 @@ footer{
 {
 	background-color: #455A64;	
 	display: inline-block;
-	padding: 20px 0;
+	padding: 14px 0;
 	width: 14.25%;	
 	margin: 0px;
 	border: solid 1px #222;
@@ -83,7 +83,7 @@ footer{
 		color:#222;
 		.shadow-inset;	
 	}
-	
+
 }
 
 
@@ -120,12 +120,13 @@ footer{
 	}	
 
 	span#ctrlidinput{
-		width: 80%;
+		width: 68%;
 		padding: 3px 10px;
 		.bordered;
 		float: left;
 		height: 55px;
 		font-size: 35px;
+		margin: 0 10px;
 	}
 
 	button{	
@@ -133,7 +134,9 @@ footer{
 		cursor: pointer;
 		margin: 0 0 0 5px;	
 		float: left;	
-
+		width: 14%;
+		max-width: none;
+		min-width: none;	
 
 	}
 
@@ -215,6 +218,13 @@ footer{
 		display: block;
 		clear: both;
 	}
+}
+
+.debug{
+	display: block;
+	border: solid 1px #900;
+	color: #000;
+	padding: 20px;
 }
 
 .canvas{
