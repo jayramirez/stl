@@ -52,7 +52,7 @@ function SuperLucky(){
 		$(self.el.ctrlNumberConfirm).click(function(){
 			//if(self.el.ctrlNumberValue.val()==''){
 		//		$('#error', self.el.codeHolder).html('<div>Please enter a control number.</div>');
-		//		$('#error div', self.el.codeHolder).fadeIn(10);
+		//		$('#error div', self.el.codeHolder).fadeIn(0);
 		//	}else{
 				self.el.codeHolder.addClass('hide');
 				CONTOLNO = self.ctrlno.join('');
@@ -70,7 +70,7 @@ function SuperLucky(){
 				btn.unbind('click').bind('click',function(){
 					var el = $(this);
 
-						if(self.ctrlno.length>=10){
+						if(self.ctrlno.length>=9){
 							self.ctrlno.shift();
 						}
 						
@@ -114,15 +114,15 @@ function SuperLucky(){
 	self.showCombinationKeys = function(){
 		self.el.ctrNoHolder.text(CONTOLNO);
 		
-		self.el.canvas.fadeIn(10,function(){
+		self.el.canvas.fadeIn(0,function(){
 			$(this).removeClass('hide');
 		})
 
 		self.combinations = [];
 		self.bet = [];
-		self.el.betKeypad.fadeOut(10,function(){
+		self.el.betKeypad.fadeOut(0,function(){
 			self.el.betKeypad.addClass('hide');
-			self.el.combKeypad.fadeIn(10,function(){
+			self.el.combKeypad.fadeIn(0,function(){
 				self.el.combKeypad.removeClass('hide');
 			})
 		});
@@ -178,7 +178,7 @@ function SuperLucky(){
 			if(self.combinations.length>1){
 				self.el.okCombinations.fadeIn();
 			}else{
-				self.el.okCombinations.fadeOut(10)
+				self.el.okCombinations.fadeOut(0)
 			}
 		}
 
@@ -186,9 +186,9 @@ function SuperLucky(){
 
 	self.resetCombinations = function(){
 		self.bet = [];
-		self.el.betKeypad.fadeOut(10,function(){
+		self.el.betKeypad.fadeOut(0,function(){
 			self.el.betKeypad.addClass('hide');
-			self.el.combKeypad.fadeIn(10,function(){
+			self.el.combKeypad.fadeIn(0,function(){
 				self.el.combKeypad.removeClass('hide');
 			})
 		});
@@ -199,9 +199,9 @@ function SuperLucky(){
 	}
 
 	self.showBetKeys = function(){
-		self.el.combKeypad.fadeOut(10,function(){
+		self.el.combKeypad.fadeOut(0,function(){
 			self.el.combKeypad.addClass('hide');
-			self.el.betKeypad.fadeIn(10,function(){
+			self.el.betKeypad.fadeIn(0,function(){
 				self.el.betKeypad.removeClass('hide');
 			})
 		});
@@ -264,7 +264,7 @@ function SuperLucky(){
 			if(self.bet.length>0){
 				self.el.okBet.fadeIn();
 			}else{
-				self.el.okBet.fadeOut(10)
+				self.el.okBet.fadeOut(0)
 			}
 		}
 	}
