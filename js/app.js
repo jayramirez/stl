@@ -15,6 +15,7 @@ var CONTOLNO = false;
 function SuperLucky(){
 
 	var self = this;
+	self.ctrlno = [];
 	self.combinations;
 	self.bet;
 	self.el;
@@ -28,45 +29,100 @@ function SuperLucky(){
 			combKeyHolder : $('.keypads .combinations'),
 			betKeypad : $('#amount'),
 			betKeyHolder : $('.keypads .amount'),
-			ctrNolHolder : $('#ctrlNumber'),
+			ctrNoHolder : $('#ctrlNumber'),
 			canvas : $('.canvas'),
 			okCombinations : $('#okCombinations'),
 			okBet : $('#okBet'),
 			cancelBet : $('#cancelBet'),
 			list : $('.lists ul'),
+			viewCtrlno : $('#ctrlidinput'),
 			viewComb : $('.selected-combinations'),
 			viewBet : $('.selected-amount'),
-			reload : $('#closeCurrent')
+			reload : $('#closeCurrent'),
+			alphaKeys : $('.alpha'),
+			numericKeys : $('.numeric')
 		}
 
 		self.el.reload.click(function(){
 			window.location.reload();
 		})
 
+		self.createAlphaNumericKeys();
+
 		$(self.el.ctrlNumberConfirm).click(function(){
-			if(self.el.ctrlNumberValue.val()==''){
-				$('#error', self.el.codeHolder).html('<div>Please enter a control number.</div>');
-				$('#error div', self.el.codeHolder).fadeIn(300);
-			}else{
+			//if(self.el.ctrlNumberValue.val()==''){
+		//		$('#error', self.el.codeHolder).html('<div>Please enter a control number.</div>');
+		//		$('#error div', self.el.codeHolder).fadeIn(10);
+		//	}else{
 				self.el.codeHolder.addClass('hide');
-				CONTOLNO = self.el.ctrlNumberValue.val();
+				CONTOLNO = self.ctrlno.join('');
 				self.showCombinationKeys();
-			}
+		//	}
 		})
 	}
 
+	self.createAlphaNumericKeys= function(){
+		self.el.ctrlNumberConfirm.hide();	
+		for (var i = 65; i <= 90; i++) {
+			var btn = $('<span class="btnkey">'+String.fromCharCode(i)+'</span>');
+			btn.appendTo(self.el.alphaKeys);
+
+				btn.unbind('click').bind('click',function(){
+					var el = $(this);
+
+						if(self.ctrlno.length>=10){
+							self.ctrlno.shift();
+						}
+						
+						self.ctrlno.push(el.text());
+						console.log(self.ctrlno,'add');
+						updateViewCtrlNumber();
+				})
+
+		};
+
+		for (var i = 0; i <=9; i++) {
+			var btn = $('<span class="btnkey">'+i+'</span>');
+			btn.appendTo(self.el.numericKeys);
+
+				btn.unbind('click').bind('click',function(){
+					var el = $(this);
+
+						if(self.ctrlno.length>=10){
+							self.ctrlno.shift();
+						}
+						
+						self.ctrlno.push(el.text());
+						console.log(self.ctrlno,'add');
+						updateViewCtrlNumber();
+				})
+
+		};
+
+		function updateViewCtrlNumber(){
+			if(self.ctrlno.length==10){
+				self.el.ctrlNumberConfirm.show();
+			}
+
+			self.el.viewCtrlno.html('');
+			$.each(self.ctrlno,function(key, val){
+			 	self.el.viewCtrlno.append(val)
+			})
+		}
+	}
+
 	self.showCombinationKeys = function(){
-		self.el.ctrNolHolder.text(CONTOLNO);
+		self.el.ctrNoHolder.text(CONTOLNO);
 		
-		self.el.canvas.fadeIn(300,function(){
+		self.el.canvas.fadeIn(10,function(){
 			$(this).removeClass('hide');
 		})
 
 		self.combinations = [];
 		self.bet = [];
-		self.el.betKeypad.fadeOut(300,function(){
+		self.el.betKeypad.fadeOut(10,function(){
 			self.el.betKeypad.addClass('hide');
-			self.el.combKeypad.fadeIn(300,function(){
+			self.el.combKeypad.fadeIn(10,function(){
 				self.el.combKeypad.removeClass('hide');
 			})
 		});
@@ -79,7 +135,7 @@ function SuperLucky(){
 
 
 		for (var i = 30; i > 0; i--) {
-			var btn = $('<span><input type="checkbox" value="'+i+'">'+i+'</span>');
+			var btn = $('<span class="btnkey"><input type="checkbox" value="'+i+'">'+i+'</span>');
 			btn.prependTo(self.el.combKeyHolder);
 
 				btn.unbind('click').bind('click',function(){
@@ -122,7 +178,7 @@ function SuperLucky(){
 			if(self.combinations.length>1){
 				self.el.okCombinations.fadeIn();
 			}else{
-				self.el.okCombinations.fadeOut(300)
+				self.el.okCombinations.fadeOut(10)
 			}
 		}
 
@@ -130,9 +186,9 @@ function SuperLucky(){
 
 	self.resetCombinations = function(){
 		self.bet = [];
-		self.el.betKeypad.fadeOut(300,function(){
+		self.el.betKeypad.fadeOut(10,function(){
 			self.el.betKeypad.addClass('hide');
-			self.el.combKeypad.fadeIn(300,function(){
+			self.el.combKeypad.fadeIn(10,function(){
 				self.el.combKeypad.removeClass('hide');
 			})
 		});
@@ -143,9 +199,9 @@ function SuperLucky(){
 	}
 
 	self.showBetKeys = function(){
-		self.el.combKeypad.fadeOut(300,function(){
+		self.el.combKeypad.fadeOut(10,function(){
 			self.el.combKeypad.addClass('hide');
-			self.el.betKeypad.fadeIn(300,function(){
+			self.el.betKeypad.fadeIn(10,function(){
 				self.el.betKeypad.removeClass('hide');
 			})
 		});
@@ -162,7 +218,7 @@ function SuperLucky(){
 
 		for (var i = 30; i > 0; i--) {
 			var value = i*multiplier;
-			var btn = $('<span><input type="checkbox" value="'+value+'">'+value+'</span>');
+			var btn = $('<span  class="btnkey"><input type="checkbox" value="'+value+'">'+value+'</span>');
 			btn.prependTo(self.el.betKeyHolder);
 
 				btn.unbind('click').bind('click',function(){
@@ -208,7 +264,7 @@ function SuperLucky(){
 			if(self.bet.length>0){
 				self.el.okBet.fadeIn();
 			}else{
-				self.el.okBet.fadeOut(300)
+				self.el.okBet.fadeOut(10)
 			}
 		}
 	}
@@ -220,6 +276,14 @@ function SuperLucky(){
 		self.showCombinationKeys();
 		self.el.viewBet.html('');
 		self.el.viewComb.html('');
+
+
+		$.post('192.168.1.100/superlucky/api.php',{
+			combinations : self.combinations,
+			amount : self.bet,
+			ctrlno : CONTOLNO,
+			token: 'SK817DS34253DS8DDASSDJHDSS970'
+		})
 	}
 }
 

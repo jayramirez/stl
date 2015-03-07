@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>DEMO</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet/less" type="text/css" href="css/style.less">
+	<script src="js/less.js"></script>	
 	<script src="js/jquery1.11.2.js"></script>	
 	<script src="js/fastclick.js"></script>
 	<script src="js/app.js"></script>
@@ -15,9 +16,15 @@
 	<div class="code-holder">
 		<div class="section-header">Control Number:</div>
 		<div class="content">
-			<input type="text" value=""	 autocomplete="off" id="ctrlNumberValue"/>
+			<span id="ctrlidinput"></span>
+			<!-- <input type="text" value=""	 autocomplete="off" id="ctrlNumberValue"/> -->
 			<button type="button" class="btn" id="ctrlNumberConfirm">OK</button>
 			<div class="clearfix"></div>
+
+			<div class="alphanumeric">
+				<div class="alpha"></div>
+				<div class="numeric"></div>
+			</div>
 			<div id="error"></div>
 		</div>
 	</div>
@@ -34,7 +41,7 @@
 				<div id="combinations">
 					<div class="section-header">Combinations</div>
 					<div class="combinations keys">
-						<button type="button" id="okCombinations">OK</button>
+						<button type="button" class="btnkey" id="okCombinations">OK</button>
 					</div>
 				</div>
 
@@ -44,7 +51,7 @@
 						<button type="button" id= "cancelBet">&times;</button>
 					</div>
 					<div class="amount keys">
-						<button type="button" id= "okBet">Place Bet</button>
+						<button type="button" id= "okBet" class="btnkey">Place Bet</button>
 					</div>
 				</div>
 
@@ -66,7 +73,7 @@
 	</div>
 
 	<footer>
-		<small>Version 0.3 Beta</small>
+		<small>Version 0.4 Beta</small>
 		<small>Powered by: Aptus Digital Solutions Inc. &copy; 2015</small>
 	</footer>
 </div>

@@ -34,9 +34,10 @@ footer{
 }
 .shadow-inset{
 	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.2) inset;
-	text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
 }
 .wrapper{
+	min-height: 700px;
 	height: 100%;
 	margin: 0 auto;
 	width: 1024px;
@@ -50,21 +51,6 @@ footer{
 	transition: all 1s;
 }
 
-.btn{
-	display: inline-block;
-	padding: 15px 0;
-	min-width: 100px;
-	margin: 0px;
-	text-align: center;
-	font-size: 20px;
-	color: #fffdee;
-	border: none;
-	box-shadow: 3px 3px 2px rgba(255, 255, 255, 0.1) inset;
-	border-radius: 0px;
-	cursor: pointer;	
-	text-shadow: 0px 1px 2px #000;
-	background-color: #3F5060;
-}
 
 .hide{
 	display: none;
@@ -76,8 +62,52 @@ footer{
 	clear: both;
 }
 
+.btnkey
+{
+	background-color: #455A64;	
+	display: inline-block;
+	padding: 20px 0;
+	width: 14.25%;	
+	margin: 0px;
+	border: solid 1px #222;
+	text-align: center;
+	font-size: 25px;
+	color: #fffdee;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+	border-radius: 2px;
+	cursor: pointer;	
+	position: relative;
+
+	&.active{
+		background: #ccc;
+		color:#222;
+		.shadow-inset;	
+	}
+
+	&:active{
+		background: #666;
+	}
+}
+
+
+.btn{
+	.btnkey;
+	// display: inline-block;
+	padding: 14px 0;
+	min-width: 100px;
+	margin: 0px;
+	// text-align: center;
+	font-size: 20px;
+	// color: #fffdee;
+	// border: none;
+	// box-shadow: 3px 3px 2px rgba(255, 255, 255, 0.1) inset;
+	// border-radius: 0px;
+	// cursor: pointer;	
+	// text-shadow: 0px 1px 2px #000;
+	// background-color: #3F5060;
+}
 .code-holder{
-	width: 600px;
+	width: 900px;
 	position: absolute;
 	left: 50%;
 	top: 40%;
@@ -92,12 +122,13 @@ footer{
 		padding: 20px;	
 	}	
 
-	input{
+	span#ctrlidinput{
 		width: 80%;
-		font-size: 40px;
 		padding: 3px 10px;
 		.bordered;
 		float: left;
+		height: 55px;
+		font-size: 35px;
 	}
 
 	button{	
@@ -107,6 +138,30 @@ footer{
 		float: left;	
 
 
+	}
+
+	.alphanumeric{
+		margin-top: 50px;
+	
+		.alpha{
+			float: left;
+			width: 65%;
+			text-align: left;
+			position: relative;
+			z-index: 2;		
+		}
+
+		.numeric{
+			float: right;
+			width: 30%;
+			text-align: left;
+			position: relative;
+			z-index: 2;
+
+			.btnkey{
+				width: 33.3333%;
+			}	
+		}
 	}
 }
 
@@ -131,18 +186,24 @@ footer{
 	z-index: 1;
 
 	button{
+		.btnkey;
 		position: absolute;
 		top:0px;
 		right:0px;
-		.btn;
-		margin: 0px;
-		text-align: center;
-		color: #eee;
+		padding: 10px 0;
+		width: 50px;
 		border: none;
-		cursor: pointer;	
-		text-shadow: 0px 1px 2px #000;
-		min-width: 58px;
 		box-shadow: none;
+		background: transparent;
+		// .btn;
+		// margin: 0px;
+		// text-align: center;
+		// color: #eee;
+		// border: none;
+		// cursor: pointer;	
+		// text-shadow: 0px 1px 2px #000;
+		// min-width: 58px;
+		// box-shadow: none;
 	}
 }
 
@@ -275,50 +336,58 @@ footer{
 					display: none;
 				}
 
-				span, button{
-					display: inline-block;
-					padding: 20px 0;
-					width: 14.2857%;	
-					margin: 0px;
-					text-align: center;
-					font-size: 25px;
-					color: #fffdee;
-					border: none;
-					box-shadow: 3px 3px 2px rgba(255, 255, 255, 0.1) inset;
-					border-radius: 0px;
-					cursor: pointer;	
-					text-shadow: 0px 1px 2px #000;
-				}
+				// span, button{
+				// 	display: inline-block;
+				// 	padding: 20px 0;
+				// 	width: 14.2857%;	
+				// 	margin: 0px;
+				// 	text-align: center;
+				// 	font-size: 25px;
+				// 	color: #fffdee;
+				// 	border: none;
+				// 	box-shadow: 3px 3px 2px rgba(255, 255, 255, 0.1) inset;
+				// 	border-radius: 0px;
+				// 	cursor: pointer;	
+				// 	text-shadow: 0px 1px 2px #000;
+				// }
 
-				button{
-					float: right;
-					width: 30%;
-					margin: 0;
-					display: none;
-					background-color: #356AB0;
-					box-shadow: none;
-				}
+				// button{
+				// 	float: right;
+				// 	width: 30%;
+				// 	margin: 0;
+				// 	display: none;
+				// 	background-color: #356AB0;
+				// 	box-shadow: none;
+				// }
 
 				&.combinations{
-					span{
-						background: #5EAEE3;
-						border: solid 1px #247CBB; 
+					.btnkey{
+						//background: #5EAEE3;
+						//border: solid 1px #247CBB; 
 
-						&.active{
-							background-color: #AAE0FF;
-							color: #444;
-						}
+						// &.active{
+						// 	background-color: #AAE0FF;
+						// 	color: #444;
+						// }
 					}
+					
+				}
+
+				button.btnkey{
+					float: right;
+					width: 30%;
+					margin-right: 2px;	
+					z-index: 3;	
 				}
 
 				&.amount{
-					span{
-						background: #49C9B2;
-						border: solid 1px #13A187; 
-						&.active{
-							background-color: #8BFFED;
-							color: #444;	
-						}
+					.btnkey{
+						//background: #49C9B2;
+						//border: solid 1px #13A187; 
+						// &.active{
+						// 	background-color: #8BFFED;
+						// 	color: #444;	
+						// }
 					}
 
 					
