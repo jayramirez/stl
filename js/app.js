@@ -75,7 +75,8 @@ function SuperLucky(){
 					var el = $(this);
 
 						if(self.ctrlno.length>=9){
-							self.ctrlno.shift();
+							return false;
+							//self.ctrlno.shift();
 						}
 						
 						self.ctrlno.push(el.text());
