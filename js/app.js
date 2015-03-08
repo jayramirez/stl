@@ -122,11 +122,11 @@ function SuperLucky(){
 			if(self.combinations.length>=5){
 				return false;
 			}
-			el.addClass('active');
+			//el.addClass('active');
 			self.combinations.push(val);
 
 		}else{	
-			el.removeClass('active');
+			//el.removeClass('active');
 			self.combinations.remove(val);
 		}
 
@@ -206,10 +206,10 @@ function SuperLucky(){
 			if(self.bet.length>=max){
 				return false;
 			}
-			el.addClass('active');
+			//el.addClass('active');
 			self.bet.push(val);
 		}else{	
-			el.removeClass('active');
+			//el.removeClass('active');
 			self.bet.remove(val);
 		}
 
