@@ -178,7 +178,7 @@ function SuperLucky(){
 			})
 
 			if(self.combinations.length>1){
-				self.el.okCombinations.fadeIn();
+				self.el.okCombinations.fadeIn(1);
 			}else{
 				self.el.okCombinations.fadeOut(0)
 			}
@@ -258,7 +258,7 @@ function SuperLucky(){
 			})
 
 			if(self.bet.length>0){
-				self.el.okBet.fadeIn();
+				self.el.okBet.fadeIn(1);
 			}else{
 				self.el.okBet.fadeOut(0)
 			}
