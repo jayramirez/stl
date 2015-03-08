@@ -114,39 +114,6 @@ function SuperLucky(){
 			})
 		}
 	}
-	
-	self.bindCombination = function(elem,val){
-		var el = $(elem);
-
-		if(!el.hasClass('active')){
-			if(self.combinations.length>=5){
-				return false;
-			}
-			//el.addClass('active');
-			self.combinations.push(val);
-
-		}else{	
-			//el.removeClass('active');
-			self.combinations.remove(val);
-		}
-
-		self.updateViewCombinations();
-	}
-
-
-	self.updateViewCombinations = function(){
-
-			self.el.viewComb.html('');
-			$.each(self.combinations,function(key, val){
-				self.el.viewComb.append('<span>'+val+'</span>')
-			})
-
-			if(self.combinations.length>1){
-				self.el.okCombinations.fadeIn(0);
-			}else{
-				self.el.okCombinations.fadeOut(0)
-			}
-		}
 
 	self.showCombinationKeys = function(){
 		self.el.ctrNoHolder.text(CONTOLNO);
@@ -172,13 +139,51 @@ function SuperLucky(){
 
 
 		for (var i = 38; i > 0; i--) {
-			var btn = $('<span class="btnkey" onclick="superLucky.bindCombination(this,'+i+')">'+i+'</span>');
+			var btn = $('<span class="btnkey">'+i+'</span>');
 			btn.prependTo(self.el.combKeyHolder);
+
+				btn.unbind('click').bind('click',function(){
+					var el = $(this);
+					var val = el.text();
+
+					if(self.combinations.length>=5){
+						return false;
+					}
+					if($.inArray(val,self.combinations)<0){
+						self.combinations.push(val);
+						updateViewCombinations();	
+					}
+
+				})
+
 		};
 
 		self.el.okCombinations.unbind('click').bind('click',function(){
 			self.showBetKeys();
 		})
+
+		function updateViewCombinations(){
+
+			self.el.viewComb.html('');
+			$.each(self.combinations,function(key, val){
+				var combiBall = $('<span>'+val+'</span>');
+				
+				combiBall.appendTo(self.el.viewComb);
+				combiBall.unbind('click').bind('click',function(){
+					self.combinations.remove(val);
+					$(this).remove();
+					self.resetCombinations();
+				})
+
+			})
+
+			if(self.combinations.length>1){
+				self.el.okCombinations.fadeIn();
+			}else{
+				self.el.okCombinations.fadeOut(0)
+			}
+		}
+
 	}
 
 	self.resetCombinations = function(){
@@ -195,40 +200,6 @@ function SuperLucky(){
 		self.el.viewBet.html('');	
 	}
 
-	self.bindBet = function(elem,val){
-		var el = $(elem);
-		var max = 1;
-		if(self.combinations.length==2){
-			max = 2;
-		}
-		if(!el.hasClass('.active')){
-
-			if(self.bet.length>=max){
-				return false;
-			}
-			//el.addClass('active');
-			self.bet.push(val);
-		}else{	
-			//el.removeClass('active');
-			self.bet.remove(val);
-		}
-
-		self.updateViewBet();
-	}
-
-
-	self.updateViewBet = function(){
-			self.el.viewBet.html('');
-			$.each(self.bet,function(key, val){
-				self.el.viewBet.append('<span>'+val+'</span>')
-			})
-
-			if(self.bet.length>0){
-				self.el.okBet.fadeIn(0);
-			}else{
-				self.el.okBet.fadeOut(0)
-			}
-		}
 	self.showBetKeys = function(){
 		self.el.combKeypad.fadeOut(0,function(){
 			self.el.combKeypad.addClass('hide');
@@ -238,9 +209,10 @@ function SuperLucky(){
 		});
 
 		var multiplier;
+		var max = 1;
 
 		switch( self.combinations.length ){
-			case 2 : multiplier = 1; break;
+			case 2 : multiplier = 1; max=2; break;
 			case 3 : multiplier = 6; break;
 			case 4 : multiplier = 12; break;
 			case 5 : multiplier = 20; break;
@@ -248,8 +220,21 @@ function SuperLucky(){
 
 		for (var i = 30; i > 0; i--) {
 			var value = i*multiplier;
-			var btn = $('<span  class="btnkey" onclick="superLucky.bindBet(this,'+i+')">'+value+'</span>');
+			var btn = $('<span class="btnkey">'+value+'</span>');
 			btn.prependTo(self.el.betKeyHolder);
+
+				btn.unbind('click').bind('click',function(){
+					var el = $(this);
+					var val = el.text();
+
+					if(self.bet.length>=max){
+						return false;
+					}
+					if($.inArray(val, self.bet)<0){
+						self.bet.push(val);
+						updateViewBet();	
+					}
+				})
 		};
 
 
@@ -260,6 +245,24 @@ function SuperLucky(){
 			self.resetCombinations();
 		})
 
+		function updateViewBet(){
+			self.el.viewBet.html('');
+			$.each(self.bet,function(key, val){
+				var betBall = $('<span>'+val+'</span>');
+				betBall.appendTo(self.el.viewBet);
+
+				betBall.unbind('click').bind('click',function(){
+					self.bet.remove(val);
+					$(this).remove();
+				})
+			})
+
+			if(self.bet.length>0){
+				self.el.okBet.fadeIn();
+			}else{
+				self.el.okBet.fadeOut(0)
+			}
+		}
 	}
 
 	self.finish = function(){
