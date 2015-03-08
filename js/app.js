@@ -92,7 +92,7 @@ function SuperLucky(){
 				btn.unbind('click').bind('click',function(){
 					var el = $(this);
 
-						if(self.ctrlno.length>=10){
+						if(self.ctrlno.length>=9){
 							return false;
 							//self.ctrlno.shift();
 						}
@@ -288,6 +288,11 @@ var superLucky = new SuperLucky();
 
 
 $(function(){
-	FastClick.attach(document.body);
 	superLucky.init();
 })
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
