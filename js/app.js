@@ -142,6 +142,7 @@ function SuperLucky(){
 			var btn = $('<span class="btnkey">'+i+'</span>');
 			btn.prependTo(self.el.combKeyHolder);
 
+				return;
 				btn.unbind('click').bind('click',function(){
 					var el = $(this);
 
